@@ -5,12 +5,22 @@ pins={'D8', 'D9', 'D10', 'D11'};
 steps={'1100', '0110', '0011','1001'};
 sensorPin = 'A0';
 
-servoMotor = servo(a2,'D12');
+servoMotor1 = servo(a,'D7');
+servoMotor2 = servo(a,'D2');
+%servoMotor3 = servo(a,'D3');
+%servoMotor4 = servo(a,'D4');
+%servoMotor5 = servo(a,'D5');
+%servoMotor6 = servo(a,'D6');
 
 steps_size=size(steps,2);                        %steps = 4
 
 x = 2;
-writePosition(servoMotor, .8);
+writePosition(servoMotor1, .4);
+writePosition(servoMotor2, .3);
+%writePosition(servoMotor3, .5);
+%writePosition(servoMotor4, .5);
+%writePosition(servoMotor5, .5);
+%writePosition(servoMotor6, .5);
 
 AllValues = 0;
 count = 0;
@@ -29,7 +39,7 @@ sensReading = AllValues/70;
 disp(sensReading);
 
 %steel
-if (sensReading < 1.2427 && sensReading > 1.1027)
+if (sensReading < 1.5997 && sensReading > 1.5000)
    disp('STEEL')
    for i = 1:2:86
 
@@ -64,7 +74,7 @@ if (sensReading < 1.2427 && sensReading > 1.1027)
 end
 
 %sandpaper
-if (sensReading < 1.4875 && sensReading > 1.2500)
+if (sensReading < 2.0875 && sensReading > 1.9105)
     disp('SANDPAPER')
    for i = 1:2:172
 
@@ -100,7 +110,7 @@ if (sensReading < 1.4875 && sensReading > 1.2500)
 end
 
 %aluminum
-if sensReading < 1.6053 && sensReading > 1.5156;
+if sensReading < 3.3500 && sensReading > 1.7156;
     disp('ALUMINUM')
    for i = 86:-2:1
 
@@ -115,9 +125,9 @@ if sensReading < 1.6053 && sensReading > 1.5156;
    end 
    
    pause(1);
-      writePosition(servoMotor, .4);
+      writePosition(servoMotor1, 1);
       pause(.2);
-      writePosition(servoMotor, .8)
+      writePosition(servoMotor1, .3)
       pause(2);
     
    for i = 1:2:86
@@ -137,8 +147,8 @@ end
 
 
 %paper
-if sensReading < 3.7284 && sensReading > 3.3234;
-    disp('paper')
+if sensReading < 3.4584 && sensReading > 3.3104;
+    disp('PAPER')
    for i = 172:-2:1
 
     step = steps{mod(i,steps_size)+1};      % step=1,2,3,4
@@ -174,7 +184,8 @@ end
 
 
 %clear
-if sensReading < 4.2923 && sensReading > 4.2875;
+if sensReading < 4.2923 && sensReading > 3.9000;
+    disp('CLEAR')
    for i = 260:-2:1
 
     step = steps{mod(i,steps_size)+1};      % step=1,2,3,4
@@ -211,7 +222,8 @@ if sensReading < 4.2923 && sensReading > 4.2875;
 end
 
 %cloth
-if (sensReading < 4.0373 && sensReading > 4.0321)
+if (sensReading < 3.8773 && sensReading > 3.6321)
+    disp('CLOTH')
    for i = 1:2:260
 
     step = steps{mod(i,steps_size)+1};      % step=1,2,3,4
